@@ -3,6 +3,7 @@ require('dotenv').config()
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
+
 client.on('message', (receivedMessage) => {
     // Prevent bot from responding to its own messages
     if (receivedMessage.author == client.user) {
@@ -28,15 +29,23 @@ function processCommand(receivedMessage) {
         helpCommand(arguments, receivedMessage)
     } else if (primaryCommand == "multiply") {
         multiplyCommand(arguments, receivedMessage)
-    } else {
+    } 
+    else if (primaryCommand == "image") {
+        imageCommand(arguments, receivedMessage)
+    } 
+
+    else {
         receivedMessage.channel.send("I don't understand the command. Try `!help` or `!multiply`")
     }
 }
+   
+
 
 function helpCommand(arguments, receivedMessage) {
     if (arguments.length > 0) {
         receivedMessage.channel.send("It looks like you might need help with " + arguments)
-    } else {
+    } 
+    else {
         receivedMessage.channel.send("I'm not sure what you need help with. Try `!help [topic]`")
     }
 }
@@ -52,5 +61,16 @@ function multiplyCommand(arguments, receivedMessage) {
     })
     receivedMessage.channel.send("The product of " + arguments + " multiplied together is: " + product.toString())
 }
+
+function imageCommand(arguments, receivedMessage) {
+    if (arguments.length > 0) {
+        receivedMessage.channel.send('This is a koala!', {files:       ['https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Koala_climbing_tree.jpg/480px-Koala_climbing_tree.jpg']});
+    } 
+    else {
+        receivedMessage.channel.send("I'm not sure what you need help with. Try `!image [topic]`")
+    }
+    
+}
+
 
 client.login(process.env.TOKEN);
