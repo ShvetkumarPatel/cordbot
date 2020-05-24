@@ -63,9 +63,12 @@ function multiplyCommand(arguments, receivedMessage) {
 }
 
 function imageCommand(arguments, receivedMessage) {
-    if (arguments.length > 0) {
+    if (receivedMessage.content.includes("koala")) {
         receivedMessage.channel.send('This is a koala!', {files:       ['https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Koala_climbing_tree.jpg/480px-Koala_climbing_tree.jpg']});
     } 
+    else if (receivedMessage.content.includes("tav")){
+        receivedMessage.channel.send('This is a koala!', {files:       ['https://www.tav.ca/wp-content/uploads/2020/01/tav-logo.png']});
+    }
     else {
         receivedMessage.channel.send("I'm not sure what you need help with. Try `!image [topic]`")
     }
