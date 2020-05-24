@@ -42,8 +42,8 @@ function processCommand(receivedMessage) {
 
 
 function helpCommand(arguments, receivedMessage) {
-    if (arguments.length > 0) {
-        receivedMessage.channel.send("It looks like you might need help with " + arguments)
+    if (receivedMessage.content.includes("command")) {
+        receivedMessage.channel.send("It looks like you might need help with command. Here is the list. 1.`!help [topic]` 2. `!multiply 2 4 10` 3. `!image [topic]` " )
     } 
     else {
         receivedMessage.channel.send("I'm not sure what you need help with. Try `!help [topic]`")
