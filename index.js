@@ -33,9 +33,12 @@ function processCommand(receivedMessage) {
     else if (primaryCommand == "image") {
         imageCommand(arguments, receivedMessage)
     } 
+    else if (fullCommand == "jokes"){
+        jokeCommand(receivedMessage)
+    }
 
     else {
-        receivedMessage.channel.send("I don't understand the command. Try `!help` or `!multiply`")
+        receivedMessage.channel.send("I don't understand the command. Try `!help command`")
     }
 }
    
@@ -46,8 +49,12 @@ function helpCommand(arguments, receivedMessage) {
         receivedMessage.channel.send("It looks like you might need help with command. Here is the list. 1.`!help [topic]` 2. `!multiply 2 4 10` 3. `!image [topic]` " )
     } 
     else {
-        receivedMessage.channel.send("I'm not sure what you need help with. Try `!help [topic]`")
+        receivedMessage.channel.send("I'm not sure what you need help with. Try `!help command`")
     }
+}
+
+function jokeCommand(receivedMessage){
+    receivedMessage.channel.send("joke1")
 }
 
 function multiplyCommand(arguments, receivedMessage) {
