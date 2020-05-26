@@ -42,6 +42,9 @@ function processCommand(receivedMessage) {
     else if (primaryCommand == "userinfo"){
         userinfoCommand (receivedMessage)
     }
+    else if (primaryCommand == "emoji"){
+        emojiCommand(arguments, receivedMessage)
+    }
     else {
         receivedMessage.channel.send("I don't understand the command. Try `!help command`")
     }
@@ -53,6 +56,22 @@ function helpCommand(arguments, receivedMessage) {
     } 
     else {
         receivedMessage.channel.send("I'm not sure what you need help with. Try `!help command`")
+    }
+}
+
+function emojiCommand (arguments, receivedMessage){
+    if(receivedMessage.content.includes("smile")){
+        receivedMessage.channel.send("😀")
+    }
+    else if(receivedMessage.content.includes("bestluck")){
+        receivedMessage.channel.send("👍")
+    }
+    else if(receivedMessage.content.includes("redheart"))
+    {
+        receivedMessage.channel.send("💖")
+    }
+    else {
+        receivedMessage.channel.send("Try `!emoji [type of emoji]`")
     }
 }
 
