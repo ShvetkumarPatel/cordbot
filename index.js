@@ -2,6 +2,11 @@
 require('dotenv').config()
 const Discord = require('discord.js');
 const client = new Discord.Client();
+const weather = require('weather-js');
+const axios = require('axios');
+const fs = require('fs');
+const bot = new Discord.Client();
+
 
 
 client.on('message', (receivedMessage) => {
@@ -9,11 +14,9 @@ client.on('message', (receivedMessage) => {
     if (receivedMessage.author == client.user) {
         return
     }
-
     if (receivedMessage.content.startsWith("!")) {
         processCommand(receivedMessage)
     }
-
    // receivedMessage.channel.send("Message received from " + receivedMessage.author.toString() + ": " + receivedMessage.content)
 })
 function processCommand(receivedMessage) {
@@ -36,13 +39,13 @@ function processCommand(receivedMessage) {
     else if (fullCommand == "jokes"){
         jokeCommand(receivedMessage)
     }
-
+    else if (primaryCommand == "userinfo"){
+        userinfoCommand (receivedMessage)
+    }
     else {
         receivedMessage.channel.send("I don't understand the command. Try `!help command`")
     }
 }
-   
-
 
 function helpCommand(arguments, receivedMessage) {
     if (receivedMessage.content.includes("command")) {
@@ -56,6 +59,24 @@ function helpCommand(arguments, receivedMessage) {
 function jokeCommand(receivedMessage){
     receivedMessage.channel.send("joke1")
 }
+
+function userinfoCommand(receivedMessage){
+    const exampleEmbed = new Discord.MessageEmbed()
+	.setTitle('User Info')
+	//.setURL('https://discord.js.org/')
+	.setAuthor(receivedMessage.author.username, 'https://pitcoder.github.io/img/portfolio/thumbnails/avatar.png', 'https://discord.gg/BnsRHR')
+	.setDescription('The User Information are as follow')
+	.setThumbnail('https://upload.wikimedia.org/wikipedia/commons/e/eb/Cb-logo-sans-words-transparent-bg.png')
+	.setImage('https://i.ya-webdesign.com/images/welcome-banner-png-2.png')
+    .setTimestamp()
+    .addField("Full Username", `${receivedMessage.author.username}  `)
+    .addField("ID", receivedMessage.author.id)
+    .addField("Created At", receivedMessage.author.createdAt)
+    .setFooter('You are the member of cordbot family', 'https://upload.wikimedia.org/wikipedia/commons/e/eb/Cb-logo-sans-words-transparent-bg.png');
+    receivedMessage.react("👍")
+     receivedMessage.channel.send(exampleEmbed)
+}
+
 
 function multiplyCommand(arguments, receivedMessage) {
     if (arguments.length < 2) {
@@ -81,6 +102,7 @@ function imageCommand(arguments, receivedMessage) {
     }
     
 }
+
 
 
 client.login(process.env.TOKEN);
