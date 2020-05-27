@@ -39,9 +39,6 @@ function processCommand(receivedMessage) {
     else if (primaryCommand == "image") {
         imageCommand(arguments, receivedMessage)
     } 
-    else if (fullCommand == "jokes"){
-        jokeCommand(receivedMessage)
-    }
     else if (primaryCommand == "userinfo"){
         userinfoCommand (receivedMessage)
     }
@@ -77,10 +74,6 @@ function emojiCommand (arguments, receivedMessage){
     else {
         receivedMessage.channel.send("Try `!emoji [type of emoji]`")
     }
-}
-
-function jokeCommand(receivedMessage){
-    receivedMessage.channel.send("joke1")
 }
 
 function userinfoCommand(receivedMessage){
@@ -156,12 +149,30 @@ var jokes = [
     { name: 'Etch', answer: 'Bless You!' },
     { name: 'Mikey', answer: 'doesnt fit through this keyhole' }
 ]
+// Unicode emojis: https://unicode.org/emoji/charts/full-emoji-list.html
+var emojis = [
+    { name: 'heart', answer: '💖' },
+    { name: 'Best wishes', answer: '👍' },
+    { name: 'ROFL', answer: '😂' },
+    { name: 'Felling Blessed', answer: '😇' },
+    { name: 'Kiss', answer: '😘' },
+    { name: 'Can I have hug', answer: '🤗' },
+    { name: 'Shhhh...!', answer: '🤫' },
+    { name: 'Corona', answer: '😷' },
+    { name: 'Do not Angry me', answer: '😡' },
+    { name: 'Shy', answer: '🙈' },
+    { name: 'Yo', answer: '🤟' },
+]
 
 //choosing a random joke from the array
 
 var knock = function() {
     var joke = jokes[Math.floor(Math.random() * jokes.length)]
     return formatJoke(joke)
+}
+var emoji = function(){
+    var emoji = emojis[Math.floor(Math.random() * emojis.length)]
+    return formatEmoji(emoji)
 }
 
 //Formatting the output to return in a new line and plug in the output variables
@@ -175,13 +186,24 @@ function formatJoke(joke) {
     ].join('\n')
 }
 
+function formatEmoji(emoji){
+    return[
+        emoji.name + '' + emoji.answer
+    ].join('\n')
+}
+
+
 //Function knock() returns the formatted joke
 client.on('message', (message) => {
     if (message.content.includes('/knock')) {
         const msg = message.content.split(' ');
 
             message.reply(knock());
-       
+    }
+    else if (message.content.includes("/emoji")){
+        const msg = message.content.split('');
+
+            message.reply(emoji());
     }
 });
 
