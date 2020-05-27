@@ -195,6 +195,7 @@ function formatEmoji(emoji){
 
 //Function knock() returns the formatted joke
 client.on('message', (message) => {
+   
     if (message.content.includes('/knock')) {
         const msg = message.content.split(' ');
 
@@ -205,6 +206,17 @@ client.on('message', (message) => {
 
             message.reply(emoji());
     }
+    if (message.author.bot) return;
+    mention = message.mentions.users.first();
+    if (message.content.includes("/send")){
+        if (mention == null) { return; }
+        message.delete();
+        mentionMessage = message.content.slice (8);
+        mention.send(mentionMessage);
+        message.channel.send("Done...!")
+
+        //www.youtube.com/watch?v=pSEvmi8Tb0E
+    } 
 });
 
 
