@@ -215,7 +215,7 @@ client.on('message', (message) => {
         mention.send(mentionMessage);
         message.channel.send("Done...!")
 
-        //www.youtube.com/watch?v=pSEvmi8Tb0E
+       
     } 
 });
 
