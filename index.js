@@ -61,6 +61,9 @@ function processCommand(receivedMessage) {
     else if(fullCommand == "serverinfo"){
         serverinfoCommand(receivedMessage)
     }
+    else if(fullCommand == "rolldice"){
+        rolldiceCommand(receivedMessage)
+    }
     else {
         receivedMessage.channel.send("I don't understand the command. Try `!help command`")
     }
@@ -108,6 +111,19 @@ function userinfoCommand(receivedMessage){
     receivedMessage.react("👍")
      receivedMessage.channel.send(exampleEmbed)
 }
+
+function rolldiceCommand(receivedMessage){
+    
+    var dice = [1, 2, 3, 4, 5, 6];
+    let ExampleEmbed = new Discord.MessageEmbed()
+        .setColor("#15f153")
+        .addField("First dice", dice[Math.floor(Math.random()*dice.length)], true)
+        .addField("Second dice", dice[Math.floor(Math.random()*dice.length)], true)
+        .setTimestamp();
+
+     receivedMessage.channel.send(ExampleEmbed);    
+}
+
 
 function infoCommand(receivedMessage){
     let uptime = ``;
@@ -259,6 +275,8 @@ var coins = [
     { name:"Coin is in the air....", answer:"...........And you get heads...!"},
     { name:"Coin is rolling", answer:"...........And You get tail...!"} 
 ]
+
+
 //choosing a random joke from the array
 
 var knock = function() {
@@ -273,6 +291,8 @@ var coin = function(){
     var coin = coins[Math.floor(Math.random() * coins.length)]
     return formatCoin(coin)
 }
+
+
 
 //Formatting the output to return in a new line and plug in the output variables
 function formatJoke(joke) {
@@ -296,6 +316,8 @@ function formatCoin(coin){
         coin.name + '' + coin.answer
     ].join('\n')
 }
+
+
 
 
 //Function knock() returns the formatted joke
