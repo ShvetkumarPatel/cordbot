@@ -255,7 +255,10 @@ var emojis = [
     { name: 'Yo', answer: '🤟' },
 ]
 
-
+var coins = [
+    { name:"Coin is in the air....", answer:"...........And you get heads...!"},
+    { name:"Coin is rolling", answer:"...........And You get tail...!"} 
+]
 //choosing a random joke from the array
 
 var knock = function() {
@@ -266,7 +269,10 @@ var emoji = function(){
     var emoji = emojis[Math.floor(Math.random() * emojis.length)]
     return formatEmoji(emoji)
 }
-
+var coin = function(){
+    var coin = coins[Math.floor(Math.random() * coins.length)]
+    return formatCoin(coin)
+}
 
 //Formatting the output to return in a new line and plug in the output variables
 function formatJoke(joke) {
@@ -285,6 +291,12 @@ function formatEmoji(emoji){
     ].join('\n')
 }
 
+function formatCoin(coin){
+    return[
+        coin.name + '' + coin.answer
+    ].join('\n')
+}
+
 
 //Function knock() returns the formatted joke
 client.on('message', (message) => {
@@ -298,6 +310,11 @@ client.on('message', (message) => {
         const msg = message.content.split('');
 
             message.reply(emoji());
+    }
+    else if (message.content.includes("/flipcoin")){
+        const msg = message.content.split('');
+
+            message.reply(coin());
     }
 
 
