@@ -23,11 +23,17 @@
   },
   "homepage": "https://github.com/ShvetkumarPatel/cordbot#readme",
   "dependencies": {
+    "@discordjs/opus": "^0.3.2",
     "axios": "^0.19.2",
     "discord.js": "^12.2.0",
     "dotenv": "^8.2.0",
+    "ffmpeg": "0.0.4",
+    "fluent-ffmpeg": "^2.1.2",
     "moment": "^2.26.0",
+    "node-fetch": "^2.6.0",
     "nodemon": "^2.0.4",
-    "weather-js": "^2.0.0"
+    "opusscript": "0.0.7",
+    "weather-js": "^2.0.0",
+    "ytdl-core": "^2.1.5"
   }
 }

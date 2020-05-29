@@ -2,10 +2,19 @@
 require('dotenv').config()
 const Discord = require('discord.js');
 const client = new Discord.Client();
+const fetch = require('node-fetch') 
 const weather = require('weather-js');
 const axios = require('axios');
 const fs = require('fs');
-const bot = new Discord.Client();
+const bot = new Discord.Client({disableEveryone: true});
+const ytdl = require("ytdl-core");
+const queue = new Map();
+let days = 0;
+let week = 0;
+
+
+bot.commands = new Discord.Collection();
+    
 
 
 
@@ -14,6 +23,7 @@ client.on('message', (receivedMessage) => {
     if (receivedMessage.author == client.user) {
         return
     }
+   
     if (receivedMessage.content.startsWith("!")) {
         processCommand(receivedMessage)
     }
@@ -44,6 +54,12 @@ function processCommand(receivedMessage) {
     }
     else if (primaryCommand == "emoji"){
         emojiCommand(arguments, receivedMessage)
+    }
+    else if(fullCommand == "info"){
+        infoCommand(receivedMessage)
+    }
+    else if(fullCommand == "serverinfo"){
+        serverinfoCommand(receivedMessage)
     }
     else {
         receivedMessage.channel.send("I don't understand the command. Try `!help command`")
@@ -93,6 +109,81 @@ function userinfoCommand(receivedMessage){
      receivedMessage.channel.send(exampleEmbed)
 }
 
+function infoCommand(receivedMessage){
+    let uptime = ``;
+    let totalSeconds = (client.uptime / 1000);
+    let hours = Math.floor(totalSeconds / 3600);
+    totalSeconds %= 3600;
+    let minutes = Math.floor(totalSeconds / 60);
+    let seconds = Math.floor(totalSeconds % 60);
+
+    if(hours > 23){
+        days = days + 1;
+        hours = 0;
+    }
+
+    if(days == 7){
+        days = 0;
+        week = week + 1;
+    }
+
+    if(week > 0){
+        uptime += `${week} week, `;
+    }
+
+    if(minutes > 60){
+        minutes = 0;
+    }
+
+    uptime += `${days} days, ${hours} hours, ${minutes} minutes and ${seconds} seconds`;
+
+    let Exampleembed = new Discord.MessageEmbed()
+        .setColor("#9400D3")
+        .setAuthor(`shvep`, client.user.displayAvatarURL)
+        .addField(`Version`,`1.0`, true)
+        .addField(`Library`,`Discord.js` , true)
+        .addField(`Creator`,`Shpatel#6678`, true)
+        .addField(`Invite`, `[Invite Cordbot Shvet](https://discordapp.com/oauth2/authorize?client_id=713399347320193174&scope=bot&permissions=26)`, true)
+        .setFooter(`Uptime: ${uptime}`);
+
+    receivedMessage.channel.send(Exampleembed);    
+}
+
+    function serverinfoCommand(receivedMessage){
+        let member = receivedMessage.mentions.members.first();
+ let uptime = ``;
+    let totalSeconds = (client.uptime / 1000);
+    let hours = Math.floor(totalSeconds / 3600);
+    totalSeconds %= 3600;
+    let minutes = Math.floor(totalSeconds / 60);
+    let seconds = Math.floor(totalSeconds % 60);
+
+    if(hours > 23){
+        days = days + 1;
+        hours = 0;
+    }
+
+    if(days == 7){
+        days = 0;
+        week = week + 1;
+    }
+
+    if(week > 0){
+        uptime += `${week} week, `;
+    }
+
+    if(minutes > 60){
+        minutes = 0;
+    }
+
+    uptime += `${days} days, ${hours} hours, ${minutes} minutes and ${seconds} seconds`;
+
+    let Exampleembed = new Discord.MessageEmbed()
+        .setColor("#228B22")
+        .addField('Uptime', uptime);
+
+    receivedMessage.channel.send(Exampleembed)
+    }
 
 
 function multiplyCommand(arguments, receivedMessage) {
@@ -112,7 +203,7 @@ function imageCommand(arguments, receivedMessage) {
         receivedMessage.channel.send('This is a koala!', {files:       ['https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Koala_climbing_tree.jpg/480px-Koala_climbing_tree.jpg']});
     } 
     else if (receivedMessage.content.includes("tav")){
-        receivedMessage.channel.send('This is a koala!', {files:       ['https://www.tav.ca/wp-content/uploads/2020/01/tav-logo.png']});
+        receivedMessage.channel.send('This is a tav!', {files:       ['https://www.tav.ca/wp-content/uploads/2020/01/tav-logo.png']});
     }
     else {
         receivedMessage.channel.send("I'm not sure what you need help with. Try `!image [topic]`")
@@ -164,6 +255,7 @@ var emojis = [
     { name: 'Yo', answer: '🤟' },
 ]
 
+
 //choosing a random joke from the array
 
 var knock = function() {
@@ -174,6 +266,7 @@ var emoji = function(){
     var emoji = emojis[Math.floor(Math.random() * emojis.length)]
     return formatEmoji(emoji)
 }
+
 
 //Formatting the output to return in a new line and plug in the output variables
 function formatJoke(joke) {
@@ -206,7 +299,8 @@ client.on('message', (message) => {
 
             message.reply(emoji());
     }
-    if (message.author.bot) return;
+
+
     mention = message.mentions.users.first();
     if (message.content.includes("/send")){
         if (mention == null) { return; }
@@ -215,9 +309,10 @@ client.on('message', (message) => {
         mention.send(mentionMessage);
         message.channel.send("Done...!")
 
-       
     } 
+
 });
 
+    
 
 client.login(process.env.TOKEN);
