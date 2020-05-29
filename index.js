@@ -11,6 +11,15 @@ const ytdl = require("ytdl-core");
 const queue = new Map();
 let days = 0;
 let week = 0;
+const moment = require("moment");
+
+const status = {
+    online: "Online",
+    idle: "Idle",
+    dnd: "Do Not Disturb",
+    offline: "Offline/Invisible"
+};
+
 
 
 bot.commands = new Discord.Collection();
@@ -23,7 +32,7 @@ client.on('message', (receivedMessage) => {
     if (receivedMessage.author == client.user) {
         return
     }
-   
+    
     if (receivedMessage.content.startsWith("!")) {
         processCommand(receivedMessage)
     }
@@ -106,7 +115,8 @@ function userinfoCommand(receivedMessage){
     .setTimestamp()
     .addField("Full Username", `${receivedMessage.author.username}  `)
     .addField("ID", receivedMessage.author.id)
-    .addField("Created At", receivedMessage.author.createdAt)
+    .addField("Created At", `${moment(receivedMessage.author.createdAt).format("dddd, MMMM Do YYYY, HH:mm:ss")}`, true)
+
     .setFooter('You are the member of cordbot family', 'https://upload.wikimedia.org/wikipedia/commons/e/eb/Cb-logo-sans-words-transparent-bg.png');
     receivedMessage.react("👍")
      receivedMessage.channel.send(exampleEmbed)
@@ -164,6 +174,7 @@ function infoCommand(receivedMessage){
 
     receivedMessage.channel.send(Exampleembed);    
 }
+
 
     function serverinfoCommand(receivedMessage){
         let member = receivedMessage.mentions.members.first();
