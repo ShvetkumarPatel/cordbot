@@ -13,6 +13,7 @@ let days = 0;
 let week = 0;
 const moment = require("moment");
 
+
 const status = {
     online: "Online",
     idle: "Idle",
@@ -33,7 +34,7 @@ client.on('message', (receivedMessage) => {
         return
     }
     
-    if (receivedMessage.content.startsWith("!")) {
+    if (receivedMessage.content.startsWith("/")) {
         processCommand(receivedMessage)
     }
     
@@ -73,6 +74,10 @@ function processCommand(receivedMessage) {
     else if(fullCommand == "rolldice"){
         rolldiceCommand(receivedMessage)
     }
+    else if(primaryCommand == "setbotstatus"){
+        setbotstatusCommand(arguments, receivedMessage)
+    }
+
     else {
         receivedMessage.channel.send("I don't understand the command. Try `!help command`")
     }
@@ -116,7 +121,6 @@ function userinfoCommand(receivedMessage){
     .addField("Full Username", `${receivedMessage.author.username}  `)
     .addField("ID", receivedMessage.author.id)
     .addField("Created At", `${moment(receivedMessage.author.createdAt).format("dddd, MMMM Do YYYY, HH:mm:ss")}`, true)
-
     .setFooter('You are the member of cordbot family', 'https://upload.wikimedia.org/wikipedia/commons/e/eb/Cb-logo-sans-words-transparent-bg.png');
     receivedMessage.react("👍")
      receivedMessage.channel.send(exampleEmbed)
@@ -212,6 +216,41 @@ function infoCommand(receivedMessage){
     receivedMessage.channel.send(Exampleembed)
     }
 
+    function setbotstatusCommand(arguments,receivedMessage){
+        const setStatus = receivedMessage.content.split(' ');
+        if(!receivedMessage.member.hasPermission("ADMINISTATOR")){
+            return receivedMessage.channel.send("You don't have the permissions to use this command!");
+        }
+    
+        else if(setStatus[1] === 'idle'){
+            client.user.setStatus('idle')
+                .then(receivedMessage.channel.send("My status has been set to: "+setStatus[1]))
+                .catch(console.error);
+        } 
+    
+        else if(setStatus[1] === 'online'){
+            client.user.setStatus('online')
+                .then(receivedMessage.channel.send("My status has been set to: "+ setStatus[1]))
+                .catch(console.error);
+        }
+    
+        else if(setStatus[1] === 'invisible'){
+            client.user.setStatus('invisible')
+                .then(receivedMessage.channel.send("My status has been set to: "+ setStatus[1]))
+                .catch(console.error);
+        }
+    
+        else if(setStatus[1] === 'dnd'){
+            client.user.setStatus('invisible')
+                .then(receivedMessage.channel.send("My status has been set to: "+ setStatus[1] + "(do not disturb)"))
+                .catch(console.error);
+        }
+    
+        else{
+            return receivedMessage.channel.send("I could not set my status please type one of the following status: idle, online, invisible, dnd (do not disturb)");
+        }
+    
+    }
 
 function multiplyCommand(arguments, receivedMessage) {
     if (arguments.length < 2) {
@@ -224,6 +263,7 @@ function multiplyCommand(arguments, receivedMessage) {
     })
     receivedMessage.channel.send("The product of " + arguments + " multiplied together is: " + product.toString())
 }
+
 
 function imageCommand(arguments, receivedMessage) {
     if (receivedMessage.content.includes("koala")) {
@@ -362,7 +402,5 @@ client.on('message', (message) => {
     } 
 
 });
-
-    
 
 client.login(process.env.TOKEN);
