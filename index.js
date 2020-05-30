@@ -72,7 +72,7 @@ function processCommand(receivedMessage) {
     }
 
     else {
-        receivedMessage.channel.send("I don't understand the command. Try `!help command`")
+        receivedMessage.channel.send("I don't understand the command. Try `/help`")
     }
 }
 
@@ -81,7 +81,7 @@ function helpCommand(receivedMessage) {
    
         const Exampleembed = new Discord.MessageEmbed()
             .setColor("#FF4500")
-            .addField("Commands",`You can view commands at [github.com](https://github.com/ShvetkumarPatel/cordbot)`);
+            .addField("Commands",`You can view commands at [github.com](https://github.com/ShvetkumarPatel/cordbot/blob/master/readme.md)`);
         receivedMessage.channel.send(Exampleembed);    
 }
 
@@ -296,7 +296,7 @@ function setafkCommand(arguments,receivedMessage){
 
 function multiplyCommand(arguments, receivedMessage) {
     if (arguments.length < 2) {
-        receivedMessage.channel.send("Not enough values to multiply. Try `!multiply 2 4 10` or `!multiply 5.2 7`")
+        receivedMessage.channel.send("Not enough values to multiply. Try `/multiply 2 4 10` or `/multiply 5.2 7`")
         return
     }
     let product = 1 
