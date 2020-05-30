@@ -13,21 +13,8 @@ let days = 0;
 let week = 0;
 const moment = require("moment");
 
-
-const status = {
-    online: "Online",
-    idle: "Idle",
-    dnd: "Do Not Disturb",
-    offline: "Offline/Invisible"
-};
-
-
-
 bot.commands = new Discord.Collection();
-    
-
-
-
+ 
 client.on('message', (receivedMessage) => {
     // Prevent bot from responding to its own messages
     if (receivedMessage.author == client.user) {
@@ -76,6 +63,9 @@ function processCommand(receivedMessage) {
     }
     else if(primaryCommand == "setbotstatus"){
         setbotstatusCommand(arguments, receivedMessage)
+    }
+    else if(primaryCommand == "setafk"){
+        setafkCommand(arguments,receivedMessage)
     }
 
     else {
@@ -251,6 +241,29 @@ function infoCommand(receivedMessage){
         }
     
     }
+ 
+function setafkCommand(arguments,receivedMessage){
+    const setStatus = receivedMessage.content.split(' ');
+
+    if(setStatus[1] === 'afk'){
+        client.user.setAFK(true);
+        receivedMessage.channel.send("Your status has been set to afk!");
+    }
+
+    else if(setStatus[1] === 'notafk'){
+        client.user.setAFK(false);
+        receivedMessage.channel.send(`Welcome back ${receivedMessage.author}`);
+    }
+
+    else if(!setStatus[1] || setStatus[1] === undefined){
+        receivedMessage.channel.send("You did not choose afk or notafk as current status!");
+    }
+
+    else{
+        receivedMessage.channel.send("You did not choose afk or notafk as current status!");
+    }
+}
+
 
 function multiplyCommand(arguments, receivedMessage) {
     if (arguments.length < 2) {
