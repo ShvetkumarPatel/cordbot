@@ -78,6 +78,9 @@ client.on('message', (receivedMessage) => {
         else if(fullCommand == "gesture"){
             gestureCommand(receivedMessage)
         }
+        else if(fullCommand == "flipcoin"){
+            flipcoinCommand(receivedMessage)
+        }
 
         else {
             receivedMessage.channel.send("I don't understand the command. Try `/help`")
@@ -141,6 +144,8 @@ client.on('message', (receivedMessage) => {
         return receivedMessage.channel.send(Exampleembed);   
     }
 
+
+    //choosing a random joke from the array
     function knockCommand(receivedMessage){
         var jokes = [
             'Dozen...........Dozen, Who?.........anybody want to let me in?',
@@ -179,7 +184,7 @@ client.on('message', (receivedMessage) => {
     
     }
 
-    
+     //choosing a random emoji from the array
     function gestureCommand(receivedMessage){
         var gestures = [
            'heart............💖',
@@ -201,6 +206,21 @@ client.on('message', (receivedMessage) => {
 
     receivedMessage.channel.send(ExampleEmbed);  
     }
+
+
+    function flipcoinCommand(receivedMessage){
+        var coin = [
+            'heads',
+            'tail'
+        ]
+        let ExampleEmbed = new Discord.MessageEmbed()
+        .setColor("#15f153")
+        .addField("Here you go.", coin[Math.floor(Math.random()*coin.length)], true)
+        .setTimestamp();
+
+    receivedMessage.channel.send(ExampleEmbed);  
+    }
+         
 
     //used moment js here on add field created at.
     //userinfo function to get information of user such as username, ID, at what time created and so on
@@ -412,65 +432,9 @@ client.on('message', (receivedMessage) => {
     
 
 
-    var coins = [
-        { name:"Coin is in the air....", answer:"...........And you get heads...!"},
-        { name:"Coin is rolling", answer:"...........And You get tail...!"} 
-    ]
-
-
-    //choosing a random joke from the array
-
-    
-     //choosing a random emoji from the array
-    var emoji = function(){
-        var emoji = emojis[Math.floor(Math.random() * emojis.length)]
-        return formatEmoji(emoji)
-    }
-
-     //choosing a random from the array
-
-    var coin = function(){
-        var coin = coins[Math.floor(Math.random() * coins.length)]
-        return formatCoin(coin)
-    }
-
-
-
-    //Formatting the output to return in a new line and plug in the output variables
-    
-
-
-
-    function formatEmoji(emoji){
-        return[
-            emoji.name + '' + emoji.answer
-        ].join('\n')
-    }
-
-
-
-    function formatCoin(coin){
-        return[
-            coin.name + '' + coin.answer
-        ].join('\n')
-    }
-
-
-
-
     //Function returns the format
 client.on('message', (message) => {
-  
-    if (message.content.includes("/emoji")){
-        const msg = message.content.split('');
 
-            message.reply(emoji());
-    }
-    else if (message.content.includes("/flipcoin")){
-        const msg = message.content.split('');
-
-            message.reply(coin());
-    }
 
 //tag user
     mention = message.mentions.users.first();
