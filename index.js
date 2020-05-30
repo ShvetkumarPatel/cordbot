@@ -81,6 +81,9 @@ client.on('message', (receivedMessage) => {
         else if(fullCommand == "flipcoin"){
             flipcoinCommand(receivedMessage)
         }
+        else if(primaryCommand == "send"){
+            sendCommand(arguments,receivedMessage)
+        }
 
         else {
             receivedMessage.channel.send("I don't understand the command. Try `/help`")
@@ -182,6 +185,18 @@ client.on('message', (receivedMessage) => {
 
     receivedMessage.channel.send(ExampleEmbed);   
     
+    }
+
+
+    function sendCommand(arguments,receivedMessage){
+        //tag user
+    mention = receivedMessage.mentions.users.first();
+    
+        if (mention == null) { return; }
+        receivedMessage.delete();
+        mentionMessage = receivedMessage.content.slice (8);
+        mention.send(mentionMessage);
+        receivedMessage.channel.send("Done...!")
     }
 
      //choosing a random emoji from the array
@@ -430,25 +445,6 @@ client.on('message', (receivedMessage) => {
 
     // Unicode emojis: https://unicode.org/emoji/charts/full-emoji-list.html
     
-
-
-    //Function returns the format
-client.on('message', (message) => {
-
-
-//tag user
-    mention = message.mentions.users.first();
-    if (message.content.includes("/send")){
-        if (mention == null) { return; }
-        message.delete();
-        mentionMessage = message.content.slice (8);
-        mention.send(mentionMessage);
-        message.channel.send("Done...!")
-
-    } 
-
-});
-
 
 
 client.login(process.env.TOKEN);
