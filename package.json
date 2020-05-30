@@ -29,10 +29,12 @@
     "dotenv": "^8.2.0",
     "ffmpeg": "0.0.4",
     "fluent-ffmpeg": "^2.1.2",
+    "jimp": "^0.12.1",
     "moment": "^2.26.0",
     "node-fetch": "^2.6.0",
     "nodemon": "^2.0.4",
     "opusscript": "0.0.7",
+    "snekfetch": "^4.0.4",
     "weather-js": "^2.0.0",
     "ytdl-core": "^2.1.5"
   }

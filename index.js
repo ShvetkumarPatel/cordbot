@@ -38,8 +38,8 @@ function processCommand(receivedMessage) {
     console.log("Command received: " + primaryCommand)
     console.log("Arguments: " + arguments) // There may not be any arguments
 
-    if (primaryCommand == "help") {
-        helpCommand(arguments, receivedMessage)
+    if (fullCommand == "help") {
+        helpCommand(receivedMessage)
     } else if (primaryCommand == "multiply") {
         multiplyCommand(arguments, receivedMessage)
     } 
@@ -55,9 +55,6 @@ function processCommand(receivedMessage) {
     else if(fullCommand == "info"){
         infoCommand(receivedMessage)
     }
-    else if(fullCommand == "serverinfo"){
-        serverinfoCommand(receivedMessage)
-    }
     else if(fullCommand == "rolldice"){
         rolldiceCommand(receivedMessage)
     }
@@ -67,6 +64,12 @@ function processCommand(receivedMessage) {
     else if(primaryCommand == "setafk"){
         setafkCommand(arguments,receivedMessage)
     }
+    else if(fullCommand == "uptime"){
+        uptimeCommand(receivedMessage)
+    }
+    else if(fullCommand == "dog"){
+        dogCommand(receivedMessage)
+    }
 
     else {
         receivedMessage.channel.send("I don't understand the command. Try `!help command`")
@@ -74,13 +77,12 @@ function processCommand(receivedMessage) {
 }
 
 
-function helpCommand(arguments, receivedMessage) {
-    if (receivedMessage.content.includes("command")) {
-        receivedMessage.channel.send("It looks like you might need help with command. Here is the list. 1.`!help [topic]` 2. `!multiply 2 4 10` 3. `!image [topic]` " )
-    } 
-    else {
-        receivedMessage.channel.send("I'm not sure what you need help with. Try `!help command`")
-    }
+function helpCommand(receivedMessage) {
+   
+        const Exampleembed = new Discord.MessageEmbed()
+            .setColor("#FF4500")
+            .addField("Commands",`You can view commands at [github.com](https://github.com/ShvetkumarPatel/cordbot)`);
+        receivedMessage.channel.send(Exampleembed);    
 }
 
 function emojiCommand (arguments, receivedMessage){
@@ -98,6 +100,34 @@ function emojiCommand (arguments, receivedMessage){
         receivedMessage.channel.send("Try `!emoji [type of emoji]`")
     }
 }
+
+function dogCommand(receivedMessage){
+    var dogs = [
+        'https://cdn.shopify.com/s/files/1/1324/6367/collections/Why_all_dogs_love_us_close_up_large.jpg?v=1487160259',
+        'https://static01.nyt.com/images/2018/02/11/realestate/11dogs-topbreeds-Chihuahua/11dogs-topbreeds-Chihuahua-master495.jpg',
+        'https://woodsboroworld.com/wp-content/uploads/2018/04/scroll0015.jpg',
+        'https://123callingalldogs.com/wp-content/uploads/2017/11/slide-4-1900x825_t.jpg',
+        'https://i.pinimg.com/736x/63/0f/0e/630f0ef3f6f3126ca11f19f4a9b85243--dachshund-puppies-weenie-dogs.jpg',
+        'http://www.insidedogsworld.com/wp-content/uploads/2016/03/Dog-Pictures.jpg',
+        'https://i.huffpost.com/gen/3754046/original.jpg',
+        'https://www.dogster.com/wp-content/uploads/2014/06/A-Doberman-puppy.jpg',
+        'http://dogcatandman.com/wp-content/uploads/2015/09/doberman1.jpg',
+        'https://petsidi.com/wp-content/uploads/2018/06/adopt-a-corgi-puppy.jpg',
+        'https://www.pets4homes.co.uk/images/breeds/50/large/fdaffb675fe084458758d97f7bac468f.jpg',
+        'https://www.lifegate.it/app/uploads/corgi-surf.jpg',
+        'https://www.ideegreen.it/wp-content/uploads/2016/01/pastore-tedesco1.jpg',
+        'http://puppytoob.com/wp-content/uploads/2016/09/Black-German-Shepherd-750x493.jpg'
+
+    ];
+
+    let Exampleembed = new Discord.MessageEmbed()
+        .setColor("#15f153")
+        .setDescription(`Oh look i found a cuty dog :dog:`)
+        .setImage(dogs[Math.floor(Math.random()*dogs.length)]);
+
+    return receivedMessage.channel.send(Exampleembed);   
+}
+
 
 function userinfoCommand(receivedMessage){
     const exampleEmbed = new Discord.MessageEmbed()
@@ -128,6 +158,41 @@ function rolldiceCommand(receivedMessage){
      receivedMessage.channel.send(ExampleEmbed);    
 }
 
+function uptimeCommand(receivedMessage){
+    let uptime = ``;
+    let totalSeconds = (client.uptime / 1000);
+    let hours = Math.floor(totalSeconds / 3600);
+    totalSeconds %= 3600;
+    let minutes = Math.floor(totalSeconds / 60);
+    let seconds = Math.floor(totalSeconds % 60);
+
+    if(hours > 23){
+        days = days + 1;
+        hours = 0;
+    }
+
+    if(days == 7){
+        days = 0;
+        week = week + 1;
+    }
+
+    if(week > 0){
+        uptime += `${week} week, `;
+    }
+
+    if(minutes > 60){
+        minutes = 0;
+    }
+
+    uptime += `${days} days, ${hours} hours, ${minutes} minutes and ${seconds} seconds`;
+
+    let Exampleembed = new Discord.MessageEmbed()
+        .setColor("#228B22")
+        .addField('Uptime', uptime);
+
+    receivedMessage.channel.send(Exampleembed);
+
+}
 
 function infoCommand(receivedMessage){
     let uptime = ``;
@@ -169,42 +234,6 @@ function infoCommand(receivedMessage){
     receivedMessage.channel.send(Exampleembed);    
 }
 
-
-    function serverinfoCommand(receivedMessage){
-        let member = receivedMessage.mentions.members.first();
- let uptime = ``;
-    let totalSeconds = (client.uptime / 1000);
-    let hours = Math.floor(totalSeconds / 3600);
-    totalSeconds %= 3600;
-    let minutes = Math.floor(totalSeconds / 60);
-    let seconds = Math.floor(totalSeconds % 60);
-
-    if(hours > 23){
-        days = days + 1;
-        hours = 0;
-    }
-
-    if(days == 7){
-        days = 0;
-        week = week + 1;
-    }
-
-    if(week > 0){
-        uptime += `${week} week, `;
-    }
-
-    if(minutes > 60){
-        minutes = 0;
-    }
-
-    uptime += `${days} days, ${hours} hours, ${minutes} minutes and ${seconds} seconds`;
-
-    let Exampleembed = new Discord.MessageEmbed()
-        .setColor("#228B22")
-        .addField('Uptime', uptime);
-
-    receivedMessage.channel.send(Exampleembed)
-    }
 
     function setbotstatusCommand(arguments,receivedMessage){
         const setStatus = receivedMessage.content.split(' ');
