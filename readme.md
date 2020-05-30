@@ -92,8 +92,8 @@ Cordbot has around fifteen commands
     "joke":{
         "name":"joke",
         "desc":"to get knock knock joke",
-        "usage":"/joke",
-        "example":"`/joke"
+        "usage":"/knock",
+        "example":"`/knock"
     },
 
     "emoji":{
