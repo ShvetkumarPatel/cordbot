@@ -29,212 +29,224 @@ client.on('message', (receivedMessage) => {
 })
 
 
-function processCommand(receivedMessage) {
-    let fullCommand = receivedMessage.content.substr(1) // Remove the leading exclamation mark
-    let splitCommand = fullCommand.split(" ") // Split the message up in to pieces for each space
-    let primaryCommand = splitCommand[0] // The first word directly after the exclamation is the command
-    let arguments = splitCommand.slice(1) // All other words are arguments/parameters/options for the command
+    function processCommand(receivedMessage) {
+        let fullCommand = receivedMessage.content.substr(1) // Remove the leading exclamation mark
+        let splitCommand = fullCommand.split(" ") // Split the message up in to pieces for each space
+        let primaryCommand = splitCommand[0] // The first word directly after the exclamation is the command
+        let arguments = splitCommand.slice(1) // All other words are arguments/parameters/options for the command
 
-    console.log("Command received: " + primaryCommand)
-    console.log("Arguments: " + arguments) // There may not be any arguments
+        console.log("Command received: " + primaryCommand)
+        console.log("Arguments: " + arguments) // There may not be any arguments
 
-    if (fullCommand == "help") {
-        helpCommand(receivedMessage)
-    } else if (primaryCommand == "multiply") {
-        multiplyCommand(arguments, receivedMessage)
-    } 
-    else if (primaryCommand == "image") {
-        imageCommand(arguments, receivedMessage)
-    } 
-    else if (primaryCommand == "userinfo"){
-        userinfoCommand (receivedMessage)
-    }
-    else if (primaryCommand == "emoji"){
-        emojiCommand(arguments, receivedMessage)
-    }
-    else if(fullCommand == "info"){
-        infoCommand(receivedMessage)
-    }
-    else if(fullCommand == "rolldice"){
-        rolldiceCommand(receivedMessage)
-    }
-    else if(primaryCommand == "setbotstatus"){
-        setbotstatusCommand(arguments, receivedMessage)
-    }
-    else if(primaryCommand == "setafk"){
-        setafkCommand(arguments,receivedMessage)
-    }
-    else if(fullCommand == "uptime"){
-        uptimeCommand(receivedMessage)
-    }
-    else if(fullCommand == "dog"){
-        dogCommand(receivedMessage)
+        if (fullCommand == "help") {
+            helpCommand(receivedMessage)
+        } else if (primaryCommand == "multiply") {
+            multiplyCommand(arguments, receivedMessage)
+        } 
+        else if (primaryCommand == "image") {
+            imageCommand(arguments, receivedMessage)
+        } 
+        else if (primaryCommand == "userinfo"){
+            userinfoCommand (receivedMessage)
+        }
+        else if (primaryCommand == "emoji"){
+            emojiCommand(arguments, receivedMessage)
+        }
+        else if(fullCommand == "info"){
+            infoCommand(receivedMessage)
+        }
+        else if(fullCommand == "rolldice"){
+            rolldiceCommand(receivedMessage)
+        }
+        else if(primaryCommand == "setbotstatus"){
+            setbotstatusCommand(arguments, receivedMessage)
+        }
+        else if(primaryCommand == "setafk"){
+            setafkCommand(arguments,receivedMessage)
+        }
+        else if(fullCommand == "uptime"){
+            uptimeCommand(receivedMessage)
+        }
+        else if(fullCommand == "dog"){
+            dogCommand(receivedMessage)
+        }
+
+        else {
+            receivedMessage.channel.send("I don't understand the command. Try `/help`")
+        }
     }
 
-    else {
-        receivedMessage.channel.send("I don't understand the command. Try `/help`")
-    }
-}
 
-
-function helpCommand(receivedMessage) {
+    //Help function to get all the commands list
+    function helpCommand(receivedMessage) {
    
         const Exampleembed = new Discord.MessageEmbed()
             .setColor("#FF4500")
             .addField("Commands",`You can view commands at [github.com](https://github.com/ShvetkumarPatel/cordbot/blob/master/readme.md)`);
         receivedMessage.channel.send(Exampleembed);    
-}
-
-function emojiCommand (arguments, receivedMessage){
-    if(receivedMessage.content.includes("smile")){
-        receivedMessage.channel.send("😀")
-    }
-    else if(receivedMessage.content.includes("bestluck")){
-        receivedMessage.channel.send("👍")
-    }
-    else if(receivedMessage.content.includes("redheart"))
-    {
-        receivedMessage.channel.send("💖")
-    }
-    else {
-        receivedMessage.channel.send("Try `!emoji [type of emoji]`")
-    }
-}
-
-function dogCommand(receivedMessage){
-    var dogs = [
-        'https://cdn.shopify.com/s/files/1/1324/6367/collections/Why_all_dogs_love_us_close_up_large.jpg?v=1487160259',
-        'https://static01.nyt.com/images/2018/02/11/realestate/11dogs-topbreeds-Chihuahua/11dogs-topbreeds-Chihuahua-master495.jpg',
-        'https://woodsboroworld.com/wp-content/uploads/2018/04/scroll0015.jpg',
-        'https://123callingalldogs.com/wp-content/uploads/2017/11/slide-4-1900x825_t.jpg',
-        'https://i.pinimg.com/736x/63/0f/0e/630f0ef3f6f3126ca11f19f4a9b85243--dachshund-puppies-weenie-dogs.jpg',
-        'http://www.insidedogsworld.com/wp-content/uploads/2016/03/Dog-Pictures.jpg',
-        'https://i.huffpost.com/gen/3754046/original.jpg',
-        'https://www.dogster.com/wp-content/uploads/2014/06/A-Doberman-puppy.jpg',
-        'http://dogcatandman.com/wp-content/uploads/2015/09/doberman1.jpg',
-        'https://petsidi.com/wp-content/uploads/2018/06/adopt-a-corgi-puppy.jpg',
-        'https://www.pets4homes.co.uk/images/breeds/50/large/fdaffb675fe084458758d97f7bac468f.jpg',
-        'https://www.lifegate.it/app/uploads/corgi-surf.jpg',
-        'https://www.ideegreen.it/wp-content/uploads/2016/01/pastore-tedesco1.jpg',
-        'http://puppytoob.com/wp-content/uploads/2016/09/Black-German-Shepherd-750x493.jpg'
-
-    ];
-
-    let Exampleembed = new Discord.MessageEmbed()
-        .setColor("#15f153")
-        .setDescription(`Oh look i found a cuty dog :dog:`)
-        .setImage(dogs[Math.floor(Math.random()*dogs.length)]);
-
-    return receivedMessage.channel.send(Exampleembed);   
-}
+    }   
 
 
-function userinfoCommand(receivedMessage){
-    const exampleEmbed = new Discord.MessageEmbed()
-	.setTitle('User Info')
-	//.setURL('https://discord.js.org/')
-	.setAuthor(receivedMessage.author.username, 'https://pitcoder.github.io/img/portfolio/thumbnails/avatar.png', 'https://discord.gg/BnsRHR')
-	.setDescription('The User Information are as follow')
-	.setThumbnail('https://upload.wikimedia.org/wikipedia/commons/e/eb/Cb-logo-sans-words-transparent-bg.png')
-	.setImage('https://i.ya-webdesign.com/images/welcome-banner-png-2.png')
-    .setTimestamp()
-    .addField("Full Username", `${receivedMessage.author.username}  `)
-    .addField("ID", receivedMessage.author.id)
-    .addField("Created At", `${moment(receivedMessage.author.createdAt).format("dddd, MMMM Do YYYY, HH:mm:ss")}`, true)
-    .setFooter('You are the member of cordbot family', 'https://upload.wikimedia.org/wikipedia/commons/e/eb/Cb-logo-sans-words-transparent-bg.png');
-    receivedMessage.react("👍")
-     receivedMessage.channel.send(exampleEmbed)
-}
-
-function rolldiceCommand(receivedMessage){
-    
-    var dice = [1, 2, 3, 4, 5, 6];
-    let ExampleEmbed = new Discord.MessageEmbed()
-        .setColor("#15f153")
-        .addField("First dice", dice[Math.floor(Math.random()*dice.length)], true)
-        .addField("Second dice", dice[Math.floor(Math.random()*dice.length)], true)
-        .setTimestamp();
-
-     receivedMessage.channel.send(ExampleEmbed);    
-}
-
-function uptimeCommand(receivedMessage){
-    let uptime = ``;
-    let totalSeconds = (client.uptime / 1000);
-    let hours = Math.floor(totalSeconds / 3600);
-    totalSeconds %= 3600;
-    let minutes = Math.floor(totalSeconds / 60);
-    let seconds = Math.floor(totalSeconds % 60);
-
-    if(hours > 23){
-        days = days + 1;
-        hours = 0;
+    //Emoji function to get particular emoji. You can extend by adding more and more else if
+    function emojiCommand (arguments, receivedMessage){
+        if(receivedMessage.content.includes("smile")){
+            receivedMessage.channel.send("😀")
+        }
+        else if(receivedMessage.content.includes("bestluck")){
+            receivedMessage.channel.send("👍")
+        }
+        else if(receivedMessage.content.includes("redheart"))
+        {
+            receivedMessage.channel.send("💖")
+        }
+        else {
+            receivedMessage.channel.send("Try `!emoji [type of emoji]`")
+        }
     }
 
-    if(days == 7){
-        days = 0;
-        week = week + 1;
+
+    //Dog function to get random image of cute dog
+    function dogCommand(receivedMessage){
+        var dogs = [
+            'https://cdn.shopify.com/s/files/1/1324/6367/collections/Why_all_dogs_love_us_close_up_large.jpg?v=1487160259',
+            'https://static01.nyt.com/images/2018/02/11/realestate/11dogs-topbreeds-Chihuahua/11dogs-topbreeds-Chihuahua-master495.jpg',
+            'https://woodsboroworld.com/wp-content/uploads/2018/04/scroll0015.jpg',
+            'https://123callingalldogs.com/wp-content/uploads/2017/11/slide-4-1900x825_t.jpg',
+            'https://i.pinimg.com/736x/63/0f/0e/630f0ef3f6f3126ca11f19f4a9b85243--dachshund-puppies-weenie-dogs.jpg',
+            'http://www.insidedogsworld.com/wp-content/uploads/2016/03/Dog-Pictures.jpg',
+            'https://i.huffpost.com/gen/3754046/original.jpg',
+            'https://www.dogster.com/wp-content/uploads/2014/06/A-Doberman-puppy.jpg',
+            'http://dogcatandman.com/wp-content/uploads/2015/09/doberman1.jpg',
+            'https://petsidi.com/wp-content/uploads/2018/06/adopt-a-corgi-puppy.jpg',
+            'https://www.pets4homes.co.uk/images/breeds/50/large/fdaffb675fe084458758d97f7bac468f.jpg',
+            'https://www.lifegate.it/app/uploads/corgi-surf.jpg',
+            'https://www.ideegreen.it/wp-content/uploads/2016/01/pastore-tedesco1.jpg',
+            'http://puppytoob.com/wp-content/uploads/2016/09/Black-German-Shepherd-750x493.jpg'
+
+        ];
+
+        let Exampleembed = new Discord.MessageEmbed()
+            .setColor("#15f153")
+            .setDescription(`Oh look i found a cuty dog :dog:`)
+            .setImage(dogs[Math.floor(Math.random()*dogs.length)]);
+
+        return receivedMessage.channel.send(Exampleembed);   
     }
 
-    if(week > 0){
-        uptime += `${week} week, `;
+    //used moment js here on add field created at.
+    //userinfo function to get information of user such as username, ID, at what time created and so on
+    function userinfoCommand(receivedMessage){
+        const exampleEmbed = new Discord.MessageEmbed()
+        .setTitle('User Info')
+        .setAuthor(receivedMessage.author.username, 'https://pitcoder.github.io/img/portfolio/thumbnails/avatar.png', 'https://discord.gg/BnsRHR')
+        .setDescription('The User Information are as follow')
+        .setThumbnail('https://upload.wikimedia.org/wikipedia/commons/e/eb/Cb-logo-sans-words-transparent-bg.png')
+        .setImage('https://i.ya-webdesign.com/images/welcome-banner-png-2.png')
+        .setTimestamp()
+        .addField("Full Username", `${receivedMessage.author.username}  `)
+        .addField("ID", receivedMessage.author.id)
+        .addField("Created At", `${moment(receivedMessage.author.createdAt).format("dddd, MMMM Do YYYY, HH:mm:ss")}`, true)
+        .setFooter('You are the member of cordbot family', 'https://upload.wikimedia.org/wikipedia/commons/e/eb/Cb-logo-sans-words-transparent-bg.png');
+        receivedMessage.react("👍")
+        receivedMessage.channel.send(exampleEmbed)
     }
 
-    if(minutes > 60){
-        minutes = 0;
+
+    //roll dice function to play this game. You will get two dice number. If want one remove second dice add field
+    function rolldiceCommand(receivedMessage){
+        
+        var dice = [1, 2, 3, 4, 5, 6];
+        let ExampleEmbed = new Discord.MessageEmbed()
+            .setColor("#15f153")
+            .addField("First dice", dice[Math.floor(Math.random()*dice.length)], true)
+            .addField("Second dice", dice[Math.floor(Math.random()*dice.length)], true)
+            .setTimestamp();
+
+        receivedMessage.channel.send(ExampleEmbed);    
     }
 
-    uptime += `${days} days, ${hours} hours, ${minutes} minutes and ${seconds} seconds`;
 
-    let Exampleembed = new Discord.MessageEmbed()
-        .setColor("#228B22")
-        .addField('Uptime', uptime);
+    //uptime function to get time at from when server/bot is on
+    function uptimeCommand(receivedMessage){
+        let uptime = ``;
+        let totalSeconds = (client.uptime / 1000);
+        let hours = Math.floor(totalSeconds / 3600);
+        totalSeconds %= 3600;
+        let minutes = Math.floor(totalSeconds / 60);
+        let seconds = Math.floor(totalSeconds % 60);
 
-    receivedMessage.channel.send(Exampleembed);
+        if(hours > 23){
+            days = days + 1;
+            hours = 0;
+        }
 
-}
+        if(days == 7){
+            days = 0;
+            week = week + 1;
+        }
 
-function infoCommand(receivedMessage){
-    let uptime = ``;
-    let totalSeconds = (client.uptime / 1000);
-    let hours = Math.floor(totalSeconds / 3600);
-    totalSeconds %= 3600;
-    let minutes = Math.floor(totalSeconds / 60);
-    let seconds = Math.floor(totalSeconds % 60);
+        if(week > 0){
+            uptime += `${week} week, `;
+        }
 
-    if(hours > 23){
-        days = days + 1;
-        hours = 0;
+        if(minutes > 60){
+            minutes = 0;
+        }
+
+        uptime += `${days} days, ${hours} hours, ${minutes} minutes and ${seconds} seconds`;
+
+        let Exampleembed = new Discord.MessageEmbed()
+            .setColor("#228B22")
+            .addField('Uptime', uptime);
+
+        receivedMessage.channel.send(Exampleembed);
+
     }
 
-    if(days == 7){
-        days = 0;
-        week = week + 1;
+
+    //info function to get details regarding version, creator, invite link and so on
+    function infoCommand(receivedMessage){
+        let uptime = ``;
+        let totalSeconds = (client.uptime / 1000);
+        let hours = Math.floor(totalSeconds / 3600);
+        totalSeconds %= 3600;
+        let minutes = Math.floor(totalSeconds / 60);
+        let seconds = Math.floor(totalSeconds % 60);
+
+        if(hours > 23){
+            days = days + 1;
+            hours = 0;
+        }
+
+        if(days == 7){
+            days = 0;
+            week = week + 1;
+        }
+
+        if(week > 0){
+            uptime += `${week} week, `;
+        }
+
+        if(minutes > 60){
+            minutes = 0;
+        }
+
+        uptime += `${days} days, ${hours} hours, ${minutes} minutes and ${seconds} seconds`;
+
+        let Exampleembed = new Discord.MessageEmbed()
+            .setColor("#9400D3")
+            .setAuthor(`shvep`, client.user.displayAvatarURL)
+            .addField(`Version`,`1.0`, true)
+            .addField(`Library`,`Discord.js` , true)
+            .addField(`Creator`,`Shpatel#6678`, true)
+            .addField(`Invite`, `[Invite Cordbot Shvet](https://discordapp.com/oauth2/authorize?client_id=713399347320193174&scope=bot&permissions=26)`, true)
+            .setFooter(`Uptime: ${uptime}`);
+
+        receivedMessage.channel.send(Exampleembed);    
     }
 
-    if(week > 0){
-        uptime += `${week} week, `;
-    }
 
-    if(minutes > 60){
-        minutes = 0;
-    }
-
-    uptime += `${days} days, ${hours} hours, ${minutes} minutes and ${seconds} seconds`;
-
-    let Exampleembed = new Discord.MessageEmbed()
-        .setColor("#9400D3")
-        .setAuthor(`shvep`, client.user.displayAvatarURL)
-        .addField(`Version`,`1.0`, true)
-        .addField(`Library`,`Discord.js` , true)
-        .addField(`Creator`,`Shpatel#6678`, true)
-        .addField(`Invite`, `[Invite Cordbot Shvet](https://discordapp.com/oauth2/authorize?client_id=713399347320193174&scope=bot&permissions=26)`, true)
-        .setFooter(`Uptime: ${uptime}`);
-
-    receivedMessage.channel.send(Exampleembed);    
-}
-
-
+    //set bot status and change the icon near to name. from green dot to yellow half moon kind of
     function setbotstatusCommand(arguments,receivedMessage){
         const setStatus = receivedMessage.content.split(' ');
         if(!receivedMessage.member.hasPermission("ADMINISTATOR")){
@@ -270,150 +282,168 @@ function infoCommand(receivedMessage){
         }
     
     }
- 
-function setafkCommand(arguments,receivedMessage){
-    const setStatus = receivedMessage.content.split(' ');
 
-    if(setStatus[1] === 'afk'){
-        client.user.setAFK(true);
-        receivedMessage.channel.send("Your status has been set to afk!");
+
+    //set afk and when set not afk bot welcomes the member 
+    function setafkCommand(arguments,receivedMessage){
+        const setStatus = receivedMessage.content.split(' ');
+
+        if(setStatus[1] === 'afk'){
+            client.user.setAFK(true);
+            receivedMessage.channel.send("Your status has been set to afk!");
+        }
+
+        else if(setStatus[1] === 'notafk'){
+            client.user.setAFK(false);
+            receivedMessage.channel.send(`Welcome back ${receivedMessage.author}`);
+        }
+
+        else if(!setStatus[1] || setStatus[1] === undefined){
+            receivedMessage.channel.send("You did not choose afk or notafk as current status!");
+        }
+
+        else{
+            receivedMessage.channel.send("You did not choose afk or notafk as current status!");
+        }
     }
 
-    else if(setStatus[1] === 'notafk'){
-        client.user.setAFK(false);
-        receivedMessage.channel.send(`Welcome back ${receivedMessage.author}`);
+
+
+    //multiply function . basic mathamatics
+    function multiplyCommand(arguments, receivedMessage) {
+        if (arguments.length < 2) {
+            receivedMessage.channel.send("Not enough values to multiply. Try `/multiply 2 4 10` or `/multiply 5.2 7`")
+            return
+        }
+        let product = 1 
+        arguments.forEach((value) => {
+            product = product * parseFloat(value)
+        })
+        receivedMessage.channel.send("The product of " + arguments + " multiplied together is: " + product.toString())
     }
 
-    else if(!setStatus[1] || setStatus[1] === undefined){
-        receivedMessage.channel.send("You did not choose afk or notafk as current status!");
+
+
+    // function image to get particular image such as tav and koala
+    function imageCommand(arguments, receivedMessage) {
+        if (receivedMessage.content.includes("koala")) {
+            receivedMessage.channel.send('This is a koala!', {files:       ['https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Koala_climbing_tree.jpg/480px-Koala_climbing_tree.jpg']});
+        } 
+        else if (receivedMessage.content.includes("tav")){
+            receivedMessage.channel.send('This is a tav!', {files:       ['https://www.tav.ca/wp-content/uploads/2020/01/tav-logo.png']});
+        }
+        else {
+            receivedMessage.channel.send("I'm not sure what you need help with. Try `!image [topic]`")
+        }
+        
     }
 
-    else{
-        receivedMessage.channel.send("You did not choose afk or notafk as current status!");
+    //for knock knock joke. everytime user will  get new joke. It choose from the var given below
+    var jokes = [
+        { name: 'Dozen', answer: 'anybody want to let me in?' },
+        { name: 'Avenue', answer: 'knocked on this door before?' },
+        { name: 'Ice Cream', answer: 'if you don\'t let me in!' },
+        { name: 'Adore', answer: 'is between us. Open up!' },
+        { name: 'Lettuce', answer: 'in. Its cold out here!' },
+        { name: 'Bed', answer: 'you can not guess who I am.' },
+        { name: 'Al', answer: 'give you a kiss if you open the door.' },
+        { name: 'Olive', answer: 'you!' },
+        { name: 'Abby', answer: 'birthday to you!' },
+        { name: 'Rufus', answer: 'the most important part of your house.' },
+        { name: 'Cheese', answer: 'a cute girl.' },
+        { name: 'Wanda', answer: 'hang out with me right now?' },
+        { name: 'Ho-ho.', answer: 'You know, your Santa impression could use a little work.' },
+        { name: 'Mary and Abbey.', answer: 'Mary Christmas and Abbey New Year!' },
+        { name: 'Carmen', answer: 'let me in already!' },
+        { name: 'Ya', answer: 'I’m excited to see you too!' },
+        { name: 'Scold', answer: 'outside—let me in!' },
+        { name: 'Robin', answer: 'you! Hand over your cash!' },
+        { name: 'Irish', answer: 'you a Merry Christmas!' },
+        { name: 'Otto', answer: 'know whats taking you so long!' },
+        { name: 'Needle', answer: 'little help gettin in the door.' },
+        { name: 'Luke', answer: 'through the keyhole to see!' },
+        { name: 'Justin', answer: 'the neighborhood and thought Id come over.' },
+        { name: 'Europe', answer: 'No, you are a poo' },
+        { name: 'To', answer: 'To Whom.' },
+        { name: 'Etch', answer: 'Bless You!' },
+        { name: 'Mikey', answer: 'doesnt fit through this keyhole' }
+    ]
+
+    // Unicode emojis: https://unicode.org/emoji/charts/full-emoji-list.html
+    var emojis = [
+        { name: 'heart', answer: '💖' },
+        { name: 'Best wishes', answer: '👍' },
+        { name: 'ROFL', answer: '😂' },
+        { name: 'Felling Blessed', answer: '😇' },
+        { name: 'Kiss', answer: '😘' },
+        { name: 'Can I have hug', answer: '🤗' },
+        { name: 'Shhhh...!', answer: '🤫' },
+        { name: 'Corona', answer: '😷' },
+        { name: 'Do not Angry me', answer: '😡' },
+        { name: 'Shy', answer: '🙈' },
+        { name: 'Yo', answer: '🤟' },
+    ]
+
+
+    var coins = [
+        { name:"Coin is in the air....", answer:"...........And you get heads...!"},
+        { name:"Coin is rolling", answer:"...........And You get tail...!"} 
+    ]
+
+
+    //choosing a random joke from the array
+
+    var knock = function() {
+        var joke = jokes[Math.floor(Math.random() * jokes.length)]
+        return formatJoke(joke)
     }
-}
 
-
-function multiplyCommand(arguments, receivedMessage) {
-    if (arguments.length < 2) {
-        receivedMessage.channel.send("Not enough values to multiply. Try `/multiply 2 4 10` or `/multiply 5.2 7`")
-        return
+     //choosing a random emoji from the array
+    var emoji = function(){
+        var emoji = emojis[Math.floor(Math.random() * emojis.length)]
+        return formatEmoji(emoji)
     }
-    let product = 1 
-    arguments.forEach((value) => {
-        product = product * parseFloat(value)
-    })
-    receivedMessage.channel.send("The product of " + arguments + " multiplied together is: " + product.toString())
-}
 
+     //choosing a random from the array
 
-function imageCommand(arguments, receivedMessage) {
-    if (receivedMessage.content.includes("koala")) {
-        receivedMessage.channel.send('This is a koala!', {files:       ['https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Koala_climbing_tree.jpg/480px-Koala_climbing_tree.jpg']});
-    } 
-    else if (receivedMessage.content.includes("tav")){
-        receivedMessage.channel.send('This is a tav!', {files:       ['https://www.tav.ca/wp-content/uploads/2020/01/tav-logo.png']});
+    var coin = function(){
+        var coin = coins[Math.floor(Math.random() * coins.length)]
+        return formatCoin(coin)
     }
-    else {
-        receivedMessage.channel.send("I'm not sure what you need help with. Try `!image [topic]`")
+
+
+
+    //Formatting the output to return in a new line and plug in the output variables
+    function formatJoke(joke) {
+        return [
+            'Knock, knock.',
+            'Who’s there?',
+            joke.name + '.',
+            joke.name + ' who?',
+            joke.name + ' ' + joke.answer
+        ].join('\n')
     }
-    
-}
-
-var jokes = [
-    { name: 'Dozen', answer: 'anybody want to let me in?' },
-    { name: 'Avenue', answer: 'knocked on this door before?' },
-    { name: 'Ice Cream', answer: 'if you don\'t let me in!' },
-    { name: 'Adore', answer: 'is between us. Open up!' },
-    { name: 'Lettuce', answer: 'in. Its cold out here!' },
-    { name: 'Bed', answer: 'you can not guess who I am.' },
-    { name: 'Al', answer: 'give you a kiss if you open the door.' },
-    { name: 'Olive', answer: 'you!' },
-    { name: 'Abby', answer: 'birthday to you!' },
-    { name: 'Rufus', answer: 'the most important part of your house.' },
-    { name: 'Cheese', answer: 'a cute girl.' },
-    { name: 'Wanda', answer: 'hang out with me right now?' },
-    { name: 'Ho-ho.', answer: 'You know, your Santa impression could use a little work.' },
-    { name: 'Mary and Abbey.', answer: 'Mary Christmas and Abbey New Year!' },
-    { name: 'Carmen', answer: 'let me in already!' },
-    { name: 'Ya', answer: 'I’m excited to see you too!' },
-    { name: 'Scold', answer: 'outside—let me in!' },
-    { name: 'Robin', answer: 'you! Hand over your cash!' },
-    { name: 'Irish', answer: 'you a Merry Christmas!' },
-    { name: 'Otto', answer: 'know whats taking you so long!' },
-    { name: 'Needle', answer: 'little help gettin in the door.' },
-    { name: 'Luke', answer: 'through the keyhole to see!' },
-    { name: 'Justin', answer: 'the neighborhood and thought Id come over.' },
-    { name: 'Europe', answer: 'No, you are a poo' },
-    { name: 'To', answer: 'To Whom.' },
-    { name: 'Etch', answer: 'Bless You!' },
-    { name: 'Mikey', answer: 'doesnt fit through this keyhole' }
-]
-// Unicode emojis: https://unicode.org/emoji/charts/full-emoji-list.html
-var emojis = [
-    { name: 'heart', answer: '💖' },
-    { name: 'Best wishes', answer: '👍' },
-    { name: 'ROFL', answer: '😂' },
-    { name: 'Felling Blessed', answer: '😇' },
-    { name: 'Kiss', answer: '😘' },
-    { name: 'Can I have hug', answer: '🤗' },
-    { name: 'Shhhh...!', answer: '🤫' },
-    { name: 'Corona', answer: '😷' },
-    { name: 'Do not Angry me', answer: '😡' },
-    { name: 'Shy', answer: '🙈' },
-    { name: 'Yo', answer: '🤟' },
-]
-
-var coins = [
-    { name:"Coin is in the air....", answer:"...........And you get heads...!"},
-    { name:"Coin is rolling", answer:"...........And You get tail...!"} 
-]
-
-
-//choosing a random joke from the array
-
-var knock = function() {
-    var joke = jokes[Math.floor(Math.random() * jokes.length)]
-    return formatJoke(joke)
-}
-var emoji = function(){
-    var emoji = emojis[Math.floor(Math.random() * emojis.length)]
-    return formatEmoji(emoji)
-}
-var coin = function(){
-    var coin = coins[Math.floor(Math.random() * coins.length)]
-    return formatCoin(coin)
-}
 
 
 
-//Formatting the output to return in a new line and plug in the output variables
-function formatJoke(joke) {
-    return [
-        'Knock, knock.',
-        'Who’s there?',
-        joke.name + '.',
-        joke.name + ' who?',
-        joke.name + ' ' + joke.answer
-    ].join('\n')
-}
+    function formatEmoji(emoji){
+        return[
+            emoji.name + '' + emoji.answer
+        ].join('\n')
+    }
 
-function formatEmoji(emoji){
-    return[
-        emoji.name + '' + emoji.answer
-    ].join('\n')
-}
 
-function formatCoin(coin){
-    return[
-        coin.name + '' + coin.answer
-    ].join('\n')
-}
+
+    function formatCoin(coin){
+        return[
+            coin.name + '' + coin.answer
+        ].join('\n')
+    }
 
 
 
 
-//Function knock() returns the formatted joke
+    //Function returns the format
 client.on('message', (message) => {
    
     if (message.content.includes('/knock')) {
@@ -432,7 +462,7 @@ client.on('message', (message) => {
             message.reply(coin());
     }
 
-
+//tag user
     mention = message.mentions.users.first();
     if (message.content.includes("/send")){
         if (mention == null) { return; }
@@ -444,5 +474,7 @@ client.on('message', (message) => {
     } 
 
 });
+
+
 
 client.login(process.env.TOKEN);

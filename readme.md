@@ -105,3 +105,10 @@
         "usage":"/send [username] [Your message]",
         "example":"`/send @Shpatel#6678 hello "
     },
+
+Keys or Token:
+https://discord.com/login?redirect_to=%2Fdevelopers%2Fapplications%2F
+
+Built with:
+discord.js
+node js
