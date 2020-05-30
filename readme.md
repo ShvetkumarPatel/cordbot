@@ -1,3 +1,7 @@
+     https://github.com/ShvetkumarPatel/cordbot
+Cordbot has around fifteen commands
+
+
         "help":{
         "name":"help",
         "desc":"Display the list of commands if you just type $help or if you type $help commandName display the current command info",
@@ -106,9 +110,26 @@
         "example":"`/send @Shpatel#6678 hello "
     },
 
+https://github.com/ShvetkumarPatel/cordbot
+
+Run The Bot
+To run cordbot on your own server:
+
+Clone this repo.
+Install dependencies with npm install.
+Get the required API keys and fill them in.
+npm test
+
 Keys or Token:
 https://discord.com/login?redirect_to=%2Fdevelopers%2Fapplications%2F
 
+
 Built with:
-discord.js
-node js
+discord.js https://discord.js.org/#/
+
+node js https://nodejs.org/en/
+
+Important Links
+https://discord.com/
+https://discord.com/download
+https://discord.com/login?redirect_to=%2Fdevelopers%2Fapplications%2F713399347320193174%2Finformation
