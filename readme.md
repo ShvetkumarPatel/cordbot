@@ -96,11 +96,11 @@ Cordbot has around fifteen commands
         "example":"`/knock"
     },
 
-    "emoji":{
+    "gesture":{
         "name":"emoji",
         "desc":"to get random emoji",
-        "usage":"/emoji",
-        "example":"`/emoji"
+        "usage":"/gesture",
+        "example":"`/gesture"
     },
 
         "tag user":{

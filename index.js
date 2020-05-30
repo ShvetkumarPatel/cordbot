@@ -75,6 +75,9 @@ client.on('message', (receivedMessage) => {
         else if(fullCommand == "knock"){
             knockCommand(receivedMessage)
         }
+        else if(fullCommand == "gesture"){
+            gestureCommand(receivedMessage)
+        }
 
         else {
             receivedMessage.channel.send("I don't understand the command. Try `/help`")
@@ -105,7 +108,7 @@ client.on('message', (receivedMessage) => {
             receivedMessage.channel.send("💖")
         }
         else {
-            receivedMessage.channel.send("Try `!emoji [type of emoji]`")
+            receivedMessage.channel.send("Try `!emoji [type of emoji] for particular emoji`")
         }
     }
 
@@ -174,6 +177,29 @@ client.on('message', (receivedMessage) => {
 
     receivedMessage.channel.send(ExampleEmbed);   
     
+    }
+
+    
+    function gestureCommand(receivedMessage){
+        var gestures = [
+           'heart............💖',
+            'Best wishes..............👍',
+             'ROFL...........😂',
+            'Felling Blessed...........😇' ,
+             'Kiss.........😘' ,
+           'Can I have hug.......🤗' ,
+             'Shhhh...!.🤫' ,
+            'Corona...........😷' ,
+           'Do not Angry me..........😡' ,
+             'Shy......🙈' ,
+            'Yo..............🤟' ,
+        ]
+        let ExampleEmbed = new Discord.MessageEmbed()
+        .setColor("#15f153")
+        .addField("Here you go.", gestures[Math.floor(Math.random()*gestures.length)], true)
+        .setTimestamp();
+
+    receivedMessage.channel.send(ExampleEmbed);  
     }
 
     //used moment js here on add field created at.
@@ -383,19 +409,7 @@ client.on('message', (receivedMessage) => {
 
 
     // Unicode emojis: https://unicode.org/emoji/charts/full-emoji-list.html
-    var emojis = [
-        { name: 'heart', answer: '💖' },
-        { name: 'Best wishes', answer: '👍' },
-        { name: 'ROFL', answer: '😂' },
-        { name: 'Felling Blessed', answer: '😇' },
-        { name: 'Kiss', answer: '😘' },
-        { name: 'Can I have hug', answer: '🤗' },
-        { name: 'Shhhh...!', answer: '🤫' },
-        { name: 'Corona', answer: '😷' },
-        { name: 'Do not Angry me', answer: '😡' },
-        { name: 'Shy', answer: '🙈' },
-        { name: 'Yo', answer: '🤟' },
-    ]
+    
 
 
     var coins = [
