@@ -85,7 +85,7 @@ Cordbot has around fifteen commands
         "name":"emoji",
         "desc":"to get particular emoji",
         "usage":"/emoji [topic]",
-        "example":"`/emoji redheart or /image bestluck or /image smile"
+        "example":"`/emoji redheart or /emoji bestluck or /emoji smile"
     },
 
 
