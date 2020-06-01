@@ -1,4 +1,8 @@
      https://github.com/ShvetkumarPatel/cordbot
+
+
+//////////////////////////..............CORDBOT IS RUNNING ONLINE 24*7. NOW ANY USER CAN GET REPLY BACK ANYTIME BECAUSE CORDBOT IS LIVE ANYTIME WITHOUT DOING ANY NPM START..................///////////////////////
+
 Cordbot has around fifteen commands
 
 

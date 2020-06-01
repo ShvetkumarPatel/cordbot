@@ -114,7 +114,7 @@ client.on('message', (receivedMessage) => {
             receivedMessage.channel.send("💖")
         }
         else {
-            receivedMessage.channel.send("Try `!emoji [type of emoji] for particular emoji`")
+            receivedMessage.channel.send("Try `/emoji redheart or /emoji bestluck for particular emoji`")
         }
     }
 
@@ -437,7 +437,7 @@ client.on('message', (receivedMessage) => {
             receivedMessage.channel.send('This is a tav!', {files:       ['https://www.tav.ca/wp-content/uploads/2020/01/tav-logo.png']});
         }
         else {
-            receivedMessage.channel.send("I'm not sure what you need help with. Try `!image [topic]`")
+            receivedMessage.channel.send("I'm not sure what you need help with. Try `/image tav or /image koala `")
         }
         
     }
