@@ -1,10 +1,22 @@
+<<<<<<< HEAD
      https://github.com/ShvetkumarPatel/cordbot
 
 
 //////////////////////////..............CORDBOT IS RUNNING ONLINE 24*7. NOW ANY USER CAN GET REPLY BACK ANYTIME BECAUSE CORDBOT IS LIVE ANYTIME WITHOUT DOING ANY NPM START..................///////////////////////
 
 Cordbot has around fifteen commands
+=======
+THIS PROJECT IS PART OF TAV COLLEGE ASSIGNMENT JOINTLY DONE BY:
 
+................NAME .......PERI PATEL........... STUDENT ID: 2010283.....................
+>>>>>>> 56d2d5732fff0e71dae375c016908ae79b692611
+
+................NAME......KHUSI PATEL........... STUDENT ID: 2010372.....................
+ 
+................NAME.......KHUSH PATEL........... STUDENT ID: 2010331.....................
+
+Cordbot has around fifteen commands
+     https://github.com/ShvetkumarPatel/cordbot
 
         "help":{
         "name":"help",
@@ -122,10 +134,13 @@ To run cordbot on your own server:
 Clone this repo.
 Install dependencies with npm install.
 Get the required API keys and fill them in.
-npm test
+npm install
 
 Keys or Token:
 https://discord.com/login?redirect_to=%2Fdevelopers%2Fapplications%2F
+
+Raise the issue if you have any here:
+https://github.com/ShvetkumarPatel/cordbot/issues
 
 
 Built with:
@@ -134,6 +149,11 @@ discord.js https://discord.js.org/#/
 node js https://nodejs.org/en/
 
 Important Links
+
 https://discord.com/
+
+
 https://discord.com/download
+
+
 https://discord.com/login?redirect_to=%2Fdevelopers%2Fapplications%2F713399347320193174%2Finformation
