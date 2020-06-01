@@ -133,6 +133,11 @@ discord.js https://discord.js.org/#/
 node js https://nodejs.org/en/
 
 Important Links
+
 https://discord.com/
+
+
 https://discord.com/download
+
+
 https://discord.com/login?redirect_to=%2Fdevelopers%2Fapplications%2F713399347320193174%2Finformation
