@@ -1,3 +1,10 @@
+THIS PROJECT IS PART OF TAV COLLEGE ASSIGNMENT JOINTLY DONE BY:
+
+................NAME .......PERI PATEL........... STUDENT ID: 2010283.....................
+
+................NAME......KHUSI PATEL........... STUDENT ID: 2010372.....................
+ 
+................NAME.......KHUSH PATEL........... STUDENT ID: 2010331.....................
 
 Cordbot has around fifteen commands
      https://github.com/ShvetkumarPatel/cordbot
