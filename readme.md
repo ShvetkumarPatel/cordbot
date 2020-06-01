@@ -123,6 +123,9 @@ npm install
 Keys or Token:
 https://discord.com/login?redirect_to=%2Fdevelopers%2Fapplications%2F
 
+Raise the issue if you have any here:
+https://github.com/ShvetkumarPatel/cordbot/issues
+
 
 Built with:
 discord.js https://discord.js.org/#/
