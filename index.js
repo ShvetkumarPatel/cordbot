@@ -339,11 +339,11 @@ client.on('message', (receivedMessage) => {
 
         let Exampleembed = new Discord.MessageEmbed()
             .setColor("#9400D3")
-            .setAuthor(`shvep`, client.user.displayAvatarURL)
+            .setAuthor(`Peri`, client.user.displayAvatarURL)
             .addField(`Version`,`1.0`, true)
             .addField(`Library`,`Discord.js` , true)
-            .addField(`Creator`,`Shpatel#6678`, true)
-            .addField(`Invite`, `[Invite Cordbot Shvet](https://discordapp.com/oauth2/authorize?client_id=713399347320193174&scope=bot&permissions=26)`, true)
+            .addField(`Creator`,`Peri#6594`, true)
+            .addField(`Invite`, `[Invite Cordbot ](https://discordapp.com/oauth2/authorize?client_id=713399347320193174&scope=bot&permissions=26)`, true)
             .setFooter(`Uptime: ${uptime}`);
 
         receivedMessage.channel.send(Exampleembed);    
