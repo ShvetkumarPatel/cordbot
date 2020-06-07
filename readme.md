@@ -1,19 +1,3 @@
-<<<<<<< HEAD
-     https://github.com/ShvetkumarPatel/cordbot
-
-
-//////////////////////////..............CORDBOT IS RUNNING ONLINE 24*7. NOW ANY USER CAN GET REPLY BACK ANYTIME BECAUSE CORDBOT IS LIVE ANYTIME WITHOUT DOING ANY NPM START..................///////////////////////
-
-Cordbot has around fifteen commands
-=======
-THIS PROJECT IS PART OF TAV COLLEGE ASSIGNMENT JOINTLY DONE BY:
-
-................NAME .......PERI PATEL........... STUDENT ID: 2010283.....................
->>>>>>> 56d2d5732fff0e71dae375c016908ae79b692611
-
-................NAME......KHUSI PATEL........... STUDENT ID: 2010372.....................
- 
-................NAME.......KHUSH PATEL........... STUDENT ID: 2010331.....................
 
 Cordbot has around fifteen commands
      https://github.com/ShvetkumarPatel/cordbot
